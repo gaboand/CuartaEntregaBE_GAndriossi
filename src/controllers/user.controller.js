@@ -8,7 +8,6 @@ const changeRole = async (req, res) => {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
-        // Solo permitir que los administradores cambien el rol del usuario
         if (req.session.role !== 'admin') {
             return res.status(403).json({ message: 'Acceso denegado. Se requieren permisos de administrador.' });
         }
