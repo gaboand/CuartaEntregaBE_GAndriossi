@@ -6,7 +6,9 @@ function authAdmin(req, res, next) {
     }
     if (userRole === "admin") {
         return next();
-    } next();
+    } else {
+        return res.status(403).json({ message: 'Acceso denegado. Se requieren permisos de administrador.' });
+    }
 }
 
 export default authAdmin;

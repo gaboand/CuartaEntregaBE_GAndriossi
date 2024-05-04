@@ -9,10 +9,15 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true, max: 100 },
   age: { type: Number, required: true, max: 100 },
   role: { type: String, required: false, max: 100, enum: ['user', 'admin', 'premium'], default: "user" },
-  cartId: {type: mongoose.Schema.Types.ObjectId, ref: "carts", required: true},
+  cartId: { type: mongoose.Schema.Types.ObjectId, ref: "carts", required: true },
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "orders" }],
   resetPasswordToken: { type: String, required: false },
   resetPasswordExpires: { type: Date, required: false },
+  last_connection: { type: Date, required: false },  
+  documents: [{ 
+    name: { type: String, required: true },
+    reference: { type: String, required: true }
+  }]
 });
 
 UserSchema.pre("find", function (next) {

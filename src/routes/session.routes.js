@@ -44,30 +44,28 @@ sessionRouter.post("/login", async (req, res) => {
   req.logger.error('Error detectado');
   req.logger.log('fatal', 'Alerta maxima');
   const { email, password } = req.body;
-  const user = await UserModel.findOne({ email });
-
-  if (user === null) {
-    res.status(400).json({
-      error: "Usuario o contraseña incorrectos",
-    });
-  } else if (!isValidPassword(user.password, password)) {
-    res.status(401).json({
-      error: "Usuario o contraseña incorrectos",
-    });
-  } else {
-
-    req.login(user, function(err) {
-      if (err) { return next(err); }
-      req.session.user = email;
-      req.session.name = user.first_name;
-      req.session.last_name = user.last_name;
-      req.session.role = user.role;
-      res.status(200).json({
-        respuesta: "ok",
-        cartId: user.cartId 
-      });
-    });
-  } 
+    const user = await UserModel.findOne({ email });
+    if (user && isValidPassword(user.password, password)) {
+        req.login(user, async function(err) {
+            if (err) { 
+                return res.status(500).json({ error: "Error en el proceso de login" });
+            }
+            user.last_connection = new Date();
+            await user.save();
+            req.session.user = email;
+            req.session.name = user.first_name;
+            req.session.last_name = user.last_name;
+            req.session.role = user.role;
+            res.status(200).json({
+                respuesta: "ok",
+                cartId: user.cartId 
+            });
+        });
+    } else {
+        res.status(401).json({
+            error: "Usuario o contraseña incorrectos",
+        });
+    }
 });
 
 sessionRouter.get(
@@ -120,16 +118,32 @@ sessionRouter.get("/current", passportCall("jwt"), authorization("admin"), (req,
     }
 });
 
-sessionRouter.get('/logout', (req, res) => {
-  req.logout(function(err) {
-      if (err) { return next(err); }
-      req.session.destroy(function(err) {
-          if (err) {
-              console.log("Error al destruir la sesión:", err);
+sessionRouter.get('/logout', async (req, res) => {
+  if (req.user) {
+      try {
+          const user = await UserModel.findById(req.user._id);
+          if (!user) {
+              console.log("Usuario no encontrado en la base de datos.");
+          } else {
+              user.last_connection = new Date();
+              await user.save();
           }
+          req.logout(function(err) {
+              if (err) { return next(err); }
+              req.session.destroy(function(err) {
+                  if (err) {
+                      console.log("Error al destruir la sesión:", err);
+                  }
+                  res.redirect('/login');
+              });
+          });
+      } catch (error) {
+          console.error("Error al actualizar la última conexión del usuario.", error);
           res.redirect('/login');
-      });
-  });
+      }
+  } else {
+      res.redirect('/login');
+  }
 });
 
 sessionRouter.get("/privado", (req, res) => { 
@@ -206,24 +220,5 @@ sessionRouter.post('/reset/:token', async (req, res) => {
       res.status(500).json({ error: 'Error al restablecer la contraseña.' });
   }
 });
-
-sessionRouter.put('/api/users/premium/:uid', authAdmin, async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const user = await UserModel.findById(uid);
-        if (!user) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-
-        user.role = user.role === 'premium' ? 'user' : 'premium';
-        await user.save();
-
-        res.status(200).json({ message: `Rol actualizado a ${user.role}` });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error al actualizar el rol del usuario' });
-    }
-});
-
 
 export default sessionRouter;
