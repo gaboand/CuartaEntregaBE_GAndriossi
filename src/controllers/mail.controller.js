@@ -96,3 +96,23 @@ export const sendMail = async (req, res) => {
     res.json({ status: "success", result });
   };
 
+  export async function sendDeletionEmail(to, userName) {
+    try {
+        await transporter.sendMail({
+            from: `Tienda <${process.env.EMAIL}>`,
+            to: to,
+            subject: "Cuenta eliminada por inactividad",
+            html: `<div>
+                      <h1>¡Hola, ${userName}!</h1>
+                      <p>Tu cuenta ha sido eliminada debido a la inactividad.</p>
+                      <p>Si crees que esto es un error o si deseas reactivar tu cuenta, por favor contacta con nosotros en <a href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a>.</p>
+                      <p>Lamentamos cualquier inconveniente que esto pueda causar.</p>
+                  </div>`
+        });
+        console.log("Correo de eliminación de cuenta enviado.");
+    } catch (error) {
+        console.error("Error al enviar el correo de eliminación de cuenta:", error);
+        throw error;
+    }
+}
+

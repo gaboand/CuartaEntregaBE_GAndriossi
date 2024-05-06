@@ -1,4 +1,7 @@
 import { UserModel } from "../dao/mongo/models/user.model.js";
+import nodemailer from 'nodemailer';
+import { differenceInMinutes } from 'date-fns';
+import { sendDeletionEmail } from "./mail.controller.js";
 
 const changeRole = async (req, res) => {
     try {
@@ -36,4 +39,32 @@ const changeRole = async (req, res) => {
     }
 };
 
-export default changeRole;
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find({}, "first_name email role");
+        res.json(users);
+    } catch (error) {
+        res.status(500).send("Error al obtener los usuarios");
+    }
+};
+
+const deleteInactiveUsers = async (req, res) => {
+    try {
+        const inactiveThreshold = new Date();
+        inactiveThreshold.setMinutes(inactiveThreshold.getMinutes() - 2880);
+        const inactiveUsers = await UserModel.find({ last_connection: { $lt: inactiveThreshold } });
+        
+        for (let user of inactiveUsers) {
+            await sendDeletionEmail(user.email, user.first_name);
+            await UserModel.findByIdAndDelete(user._id);
+        }
+
+        res.send("Usuarios inactivos eliminados");
+    } catch (error) {
+        res.status(500).send("Error al eliminar usuarios inactivos");
+    }
+};
+
+
+
+export { getAllUsers, deleteInactiveUsers, changeRole };

@@ -10,6 +10,7 @@ import { ordersDao } from "../dao/index.js";
 import authUser from "../middlewares/authUser.js";
 import authAdmin from "../middlewares/authAdmin.js";
 import authOrder from "../middlewares/authOrder.js";
+import { UserModel } from "../dao/mongo/models/user.model.js";
 
 const viewsRouter = Router();
 const cartDB = new CartDB();
@@ -157,6 +158,26 @@ viewsRouter.get("/orders/:orderId", async (req, res) => { //authOrder
     } catch (error) {
         console.log("Error al obtener los detalles de la orden:", error);
         res.status(500).send("Error al recuperar los detalles de la orden");
+    }
+});
+
+viewsRouter.get("/admin/users", authAdmin, async (req, res) => {
+    try {
+        const users = await UserModel.find({}, "first_name last_name email role documents").lean();
+
+        const usersWithAdminFlag = users.map(user => ({
+            ...user,
+            isAdmin: user.role === 'admin'
+        }));
+
+        res.render("adminUsers", {
+            title: "Administración de Usuarios",
+            users: users,
+            isAdmin: req.user && req.user.role === 'admin'
+        });
+    } catch (error) {
+        console.error("Error al obtener los usuarios para la administración:", error);
+        res.status(500).send("Error al recuperar los datos de los usuarios");
     }
 });
 

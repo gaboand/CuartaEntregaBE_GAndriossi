@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Administración de Usuarios</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Admin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{this.first_name}} {{this.last_name}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.role}}</td>
+                <td>{{#if this.isAdmin}}Sí{{else}}No{{/if}}</td>
+                <td>
+                    {{#unless this.isAdmin}}
+                    <button onclick="changeRole('{{this._id}}', 'admin')">Hacer Admin</button>
+                    {{/unless}}
+                    <button onclick="deleteUser('{{this._id}}')">Eliminar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/adminUsers.js"></script> <!-- Asegúrate de tener este archivo JS para manejar las acciones -->
+</body>
+</html>
