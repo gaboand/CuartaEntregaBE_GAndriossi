@@ -2,6 +2,7 @@ import {productsDao} from "../dao/index.js"
 import CustomError from "../services/CustomError.js";
 import enumErrors from "../services/enum.js";
 import { generateAddProductErrorInfo , generateFindProductErrorInfo } from "../services/info.js";
+import { sendProductDeletionEmail, sendOwnerProductDeletionEmail } from "./mail.controller.js";
 
 const getProducts = async (req, res) => {
     try {
@@ -38,7 +39,7 @@ const getProducts = async (req, res) => {
             data: products,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -67,7 +68,7 @@ const getProductId = async (req, res) => {
             data: product,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -114,7 +115,7 @@ const saveProducts = async (req, res) => {
             products,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -165,7 +166,7 @@ const updateProducts = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log("updateProducts: Error al actualizar el producto", error);
+        console.error("updateProducts: Error al actualizar el producto", error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -192,6 +193,7 @@ const deleteProducts = async (req, res) => {
 
         if (req.user.role === 'premium' && ownerEmail === userEmail) {
             await productsDao.deleteProductById(pid);
+            await sendOwnerProductDeletionEmail(ownerEmail, req.user.first_name, product.title);
             return res.status(200).json({
                 success: true,
                 message: "Producto eliminado exitosamente",
@@ -199,6 +201,7 @@ const deleteProducts = async (req, res) => {
             });
         } else if (req.user.role === 'admin') {
             await productsDao.deleteProductById(pid);
+            await sendProductDeletionEmail(ownerEmail, req.user.first_name, product.title);
             return res.status(200).json({
                 success: true,
                 message: "Producto eliminado exitosamente",
@@ -211,7 +214,7 @@ const deleteProducts = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
             success: false,
             message: error.message,

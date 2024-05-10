@@ -105,7 +105,6 @@ app.use(cors({
 }));
 
 io.on("connection", (socket) => {
-	console.log("Se conecto un nuevo usuario");
 });
 
 startMongoConnection()

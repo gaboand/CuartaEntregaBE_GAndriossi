@@ -27,7 +27,6 @@ export async function sendConfirmationEmail(to, orderId, total) {
               }
           ]
       });
-      console.log("Correo de confirmación enviado:", result);
   } catch (error) {
       console.error("Error al enviar el correo de confirmación:", error);
       throw error; 
@@ -72,7 +71,6 @@ export async function sendWelcomeEmail(to, userName) {
               }
           ]
       });
-      console.log("Correo de bienvenida enviado.");
   } catch (error) {
       console.error("Error al enviar el correo de bienvenida:", error);
       throw error;
@@ -109,10 +107,48 @@ export const sendMail = async (req, res) => {
                       <p>Lamentamos cualquier inconveniente que esto pueda causar.</p>
                   </div>`
         });
-        console.log("Correo de eliminación de cuenta enviado.");
     } catch (error) {
         console.error("Error al enviar el correo de eliminación de cuenta:", error);
         throw error;
     }
 }
+
+export async function sendProductDeletionEmail(to, userName, productName) {
+  try {
+      await transporter.sendMail({
+          from: `Tienda <${process.env.EMAIL}>`,
+          to: to,
+          subject: "Producto eliminado de nuestro catálogo",
+          html: `<div>
+                    <h1>¡Hola, ${userName}!</h1>
+                    <p>Queremos informarte que el producto "${productName}" ha sido eliminado de nuestro catálogo.</p>
+                    <p>Si tienes alguna pregunta o necesitas ayuda con otros productos, no dudes en contactarnos en <a href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a>.</p>
+                    <p>Lamentamos cualquier inconveniente que esto pueda causar y agradecemos tu comprensión.</p>
+                </div>`
+      });
+  } catch (error) {
+      console.error("Error al enviar el correo de eliminación de producto:", error);
+      throw error;
+  }
+}
+export async function sendOwnerProductDeletionEmail(to, userName, productName) {
+  try {
+      await transporter.sendMail({
+          from: `Tienda <${process.env.EMAIL}>`,
+          to: to,
+          subject: "Producto eliminado de nuestro catálogo",
+          html: `<div>
+                    <h1>¡Hola, ${userName}!</h1>
+                    <p>Queremos confirmate la eliminacion del producto "${productName}".</p>
+                    <p>Si tienes alguna pregunta o necesitas ayuda con otros productos, no dudes en contactarnos en <a href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a>.</p>
+                    <p>Si no haz sido tu, por favor ponte en contacto con nuestro equipo de soporte .</p>
+                    <p>Muchas gracias .</p>
+                </div>`
+      });
+  } catch (error) {
+      console.error("Error al enviar el correo de eliminación de producto:", error);
+      throw error;
+  }
+}
+
 

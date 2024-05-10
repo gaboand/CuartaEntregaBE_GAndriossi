@@ -10,15 +10,12 @@
   {{#each products.products}}
   <div class="productCard">
     <div class="cardProduct__image">
-      <img src="{{this.thumbnail}}" alt="{{this.title}}" />
+      <img class="pics"src="{{this.thumbnail}}" alt="{{this.title}}" />
     </div>
     <div class="cardProduct__info">
       <h3 class="nombreProducto">{{this.title}}</h3>
-      <p class="detalleProducto">Descripcion: {{this.description}}</p>
       <p class="detalleProducto">Precio: ${{this.price}}</p>
       <p class="detalleProducto">Stock: {{this.stock}}</p>
-      <p class="detalleProducto">Codigo: {{this.code}}</p>
-      <p class="detalleProducto">Id Prod: {{this._id}}</p>
 
       <div class="cartControl">
         <p for="quantity-{{this._id}}">Cantidad:</p>

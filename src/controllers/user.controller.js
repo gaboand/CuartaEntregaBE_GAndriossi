@@ -65,6 +65,21 @@ const deleteInactiveUsers = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    const { uid } = req.params; 
 
+    try {
+        const user = await UserModel.findById(uid);
+        if (!user) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
 
-export { getAllUsers, deleteInactiveUsers, changeRole };
+        await UserModel.findByIdAndDelete(uid);
+        return res.status(200).json({ message: "Usuario eliminado con éxito" });
+    } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        res.status(500).json({ message: 'Error al eliminar el usuario' });
+    }
+};
+
+export { getAllUsers, deleteInactiveUsers, changeRole, deleteUser };

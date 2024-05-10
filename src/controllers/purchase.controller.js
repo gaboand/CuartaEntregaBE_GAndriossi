@@ -45,7 +45,6 @@ export const createOrderFromCart = async (req, res) => {
               totalPrice: totalPrice,
               status: "Pendiente"
           });
-          console.log("Orden creada:", newOrder);
 
           await UserModel.findByIdAndUpdate(req.session.passport.user, { $push: { orders: newOrder._id } });
 

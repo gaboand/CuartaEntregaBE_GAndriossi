@@ -10,7 +10,7 @@ function emptyCart() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log("Carrito vaciado con éxito");
+                    location.reload();
                     updateCartUI({ total: 0, totalProducts: 0 });
                 } else {
                     console.error(data.message);
@@ -18,7 +18,6 @@ function emptyCart() {
             })
             .catch(error => console.error('Error:', error));
     } else {
-        console.log("El usuario prefirió no vaciar el carrito");
     }
 }
 
@@ -30,7 +29,7 @@ function deleteProductFromCart(productId) {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log(`Producto ${productId} eliminado con éxito del carrito`);
+                    location.reload();
                 } else {
                     console.error(data.message);
                 }
@@ -68,7 +67,7 @@ function updateQuantityOnServer(productId, newQuantity) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            console.log("Cantidad del producto actualizada con éxito");
+            location.reload();
         } else {
             console.error(data.message);
         }

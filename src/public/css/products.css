@@ -18,21 +18,30 @@
     color: #fff;
     padding: 20px;
   }
+
+  .pics{
+    max-height: 150px;
+  }
   
   .productList {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px;
+    margin: 10px;
   }
   
   .productCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 1px solid var(--border-color);
     border-radius: 10px;
     margin: 10px;
     padding: 15px;
-    width: 300px;
+    width: 220px;
     max-width: 100%;
+    max-height: 460px;
+  
   }
 
   .nombreProducto{
@@ -136,7 +145,7 @@
   }
 
   .cantidad{
-    width: 100px;
+    width: 60px;
     box-sizing: border-box;
     margin-bottom: 10px;
     text-align: center;
@@ -149,24 +158,24 @@
 
   .boton_menos{
     background-color: #333;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
-    width: 10%;
+    width: 12%;
   }
 
   .boton_menos:hover {
-    background-color: #7b2525;
+    background-color: #a91212;
 }
   
   .boton_mas{
     background-color: #333;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
-    width: 10%;
+    width: 12%;
   }
 
   .boton_mas:hover {
-    background-color: #19572f;
+    background-color: #170c8b;
 }
 
   input[type="number"]::-webkit-inner-spin-button,

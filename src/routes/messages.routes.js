@@ -6,7 +6,7 @@ const messagesRouter = Router();
 const messagesDB = new MessagesDB();
 
 
-messagesRouter.post("/", async (req, res) => {// authUser
+messagesRouter.post("/", authUser, async (req, res) => {
   const { user, message } = req.body;
   try {
       const response = await messagesDB.createMessage({ user, message });

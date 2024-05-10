@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
       form.addEventListener("submit", function(e) {
           e.preventDefault();
           const email = document.getElementById("email").value;
-          // Llamada a la función postForgot solo con el email
           postForgot(email);
       });
   } else {

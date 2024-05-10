@@ -156,7 +156,7 @@ viewsRouter.get("/orders/:orderId", async (req, res) => { //authOrder
             style: "css/order.css",
         });
     } catch (error) {
-        console.log("Error al obtener los detalles de la orden:", error);
+        console.error("Error al obtener los detalles de la orden:", error);
         res.status(500).send("Error al recuperar los detalles de la orden");
     }
 });

@@ -77,13 +77,10 @@ describe("Testing proyecto ecommerce", () => {
             expect(result.statusCode).to.equal(200);
         });
     
-    
         it("El endpoint DELETE /api/carts/:cid/empty debería vaciar el carrito", async () => {
             const result = await requester.delete("/api/carts/662fc1243364176aa3b67db2/empty");
             expect(result.statusCode).to.equal(200);
         });
-    
-
     });
     
 
@@ -111,7 +108,6 @@ describe("Testing proyecto ecommerce", () => {
             const result = await requester.get("/api/session/logout");
             expect(result.statusCode).to.equal(302);
         });
-    
     });
 })
 

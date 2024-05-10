@@ -123,7 +123,7 @@ sessionRouter.get('/logout', async (req, res) => {
       try {
           const user = await UserModel.findById(req.user._id);
           if (!user) {
-              console.log("Usuario no encontrado en la base de datos.");
+              console.error("Usuario no encontrado en la base de datos.");
           } else {
               user.last_connection = new Date();
               await user.save();
@@ -132,7 +132,7 @@ sessionRouter.get('/logout', async (req, res) => {
               if (err) { return next(err); }
               req.session.destroy(function(err) {
                   if (err) {
-                      console.log("Error al destruir la sesión:", err);
+                      console.error("Error al destruir la sesión:", err);
                   }
                   res.redirect('/login');
               });

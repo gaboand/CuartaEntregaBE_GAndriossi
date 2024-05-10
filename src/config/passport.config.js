@@ -35,7 +35,7 @@ const initializePassport = () => {
           const result = await UserModel.create(newUser);
           return done(null, result);
         } catch (error) {
-          console.log( error);
+          console.error( error);
           return done("Error al crear el usuario", error);
         }
       }

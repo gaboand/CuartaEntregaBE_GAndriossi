@@ -11,10 +11,8 @@ export default class MongoSingleton {
   }
   static getInstance() {
     if (this.#instance) {
-      console.log("Ya existe una conexión");
       return this.#instance;
     }
-    console.log("No existe una conexion");
     this.#instance = new MongoSingleton();
     return this.#instance;
   }
