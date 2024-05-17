@@ -21,9 +21,6 @@ const PORT = process.env.PORT || 8080;
 const DB_URL = process.env.DB_URL;
 const COOKIESECRET = process.env.CODERSECRET;
 
-console.log("DB_URL:", DB_URL);
-console.log("COOKIESECRET:", COOKIESECRET);
-
 const swaggerOptions = {
   definition: {
     openapi: "3.0.1",
