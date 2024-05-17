@@ -26,6 +26,10 @@ Inicia el ejecutor de pruebas en watch mode.\
 
 Rutas de referencia para probar la funcionalidad de los views
 
+## Pagina de inicio con deployment en railway (login con local estrategy o Github)/ links a singup / forgot
+
+https://cuartaentregabegandriossi-production.up.railway.app/login
+
 ## Pagina de inicio (login con local estrategy o Github)/ links a singup / forgot
 
 http://localhost:3000/login
