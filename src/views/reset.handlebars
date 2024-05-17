@@ -1,12 +1,13 @@
-<div class="reset-password-container">
-        <h1>Restablecer Contraseña</h1>
-        <p>Por favor, introduce tu nueva contraseña.</p>
-        <form id="reset-password-form" action="/api/session/reset/{{token}}" method="POST">
-            <div class="form-group">
+<main class="reset_main">
+    <div class="reset_password_container">
+        <h1 class="reset_title">Restablecer Contraseña</h1>
+        <h4 class="reset_description">Por favor, introduce tu nueva contraseña.</h4>
+        <form id="reset_password_form" action="/api/session/reset/{{token}}" method="POST">
+            <div class="form_group">
                 <label for="newPassword">Nueva Contraseña:</label>
                 <input type="password" id="newPassword" name="newPassword" required>
             </div>
-            <div class="form-group">
+            <div class="form_group">
                 <label for="confirmNewPassword">Confirmar Nueva Contraseña:</label>
                 <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
             </div>
@@ -14,4 +15,5 @@
             <button type="submit" class="submit-btn">Restablecer Contraseña</button>
         </form>
     </div>
+</main>
     <script src="/js/reset.password.js"></script> 

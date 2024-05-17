@@ -1,0 +1,35 @@
+# Ecommerce - Node Express Mong & Handlebars
+
+Este proyecto fue diseñado bajo la orbito del curso Back-end en Coderhouse
+
+## Scripts disponibles
+
+En el directorio del proyecto, tu puedes inciarlo con el siguiente comendo:
+
+### `npm run start`
+
+
+En modo developers debes utilizar:
+
+### `npm run dev`
+
+y el puerto utilizado es [http://localhost:3000] mismo puerto a utilizar en el browser
+
+Para ver los cambios debes refrescar la página y observar en la consola si hubiese errores.
+
+
+Inicia el ejecutor de pruebas en watch mode.\
+
+### `npm run test`
+
+-------------------------------------------------------------------------------------------------
+
+Rutas de referencia para probar la funcionalidad de los views
+
+## Pagina de inicio (login con local estrategy o Github)/ links a singup / forgot
+
+http://localhost:3000/login
+
+## Administrador de usuarios (debe loguearse como admin)
+
+http://localhost:3000/admin/users

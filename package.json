@@ -1,7 +1,7 @@
 {
   "name": "cuarta_entrega",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ecommerce",
   "main": "index.js",
   "type": "module",
   "scripts": {

@@ -57,7 +57,7 @@ export async function sendWelcomeEmail(to, userName) {
           subject: "¡Bienvenido a La Tienda del Wihisky!",
           html: `<div>
                     <h1 style='color: #3478f7'>¡Hola, ${userName}!</h1>
-                    <p>Estamos encantados de darte la bienvenida a La Tienda del Wihisky!!.</p>
+                    <p>Estamos encantados de darte la bienvenida a La Tienda del Whisky!!.</p>
                     <p>Para empezar, te recomendamos...</p>
                     <p>Si tienes alguna pregunta, no dudes a contactarnos en <a href="mailto:${process.env.EMAIL}">${process.env.EMAIL}</a>.</p>
                     <p>¡Gracias por unirte a nosotros y bienvenido a la familia!</p>
