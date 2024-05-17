@@ -177,7 +177,7 @@ sessionRouter.post('/forgot', async (req, res) => {
 
   await user.save();
 
-  const resetURL = `http://localhost:3000/reset/${resetToken}`;
+  const resetURL = `https://cuartaentregabegandriossi-production.up.railway.app//reset/${resetToken}`;
   await sendPasswordResetEmail(user.email, resetURL);
 
   res.status(200).json({ message: 'Se ha enviado un correo electrónico con las instrucciones para restablecer la contraseña.' });
