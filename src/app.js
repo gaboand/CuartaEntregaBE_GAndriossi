@@ -12,17 +12,14 @@ import initializePassport from "./config/passport.config.js";
 import initializePassportGH from "./config/passportGithub.config.js";
 import initializePassportJWT from "./config/passportJWT.config.js";
 import cors from "cors";
-import dotenv from "dotenv";
 import { addLogger } from "./middlewares/logger.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
-
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const DB_URL = process.env.DB_URL;
 const COOKIESECRET = process.env.CODERSECRET;
-dotenv.config();
 
 const swaggerOptions = {
   definition: {
