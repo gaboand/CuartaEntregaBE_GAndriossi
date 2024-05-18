@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha --timeout 15000 src/test/supertest.test.js",
+    "test": "mocha --timeout 15000 test/supertest.test.js",
     "start": "node src/app.js",
     "dev": "node --watch src/app.js"
   },
