@@ -11,7 +11,7 @@ describe("Testing proyecto ecommerce", () => {
         });
 
         it("El endpoint GET /api/products/:pid debe obtener un producto específico", async () => {
-            const productId = "662fc82a922b3a971320fed4";
+            const productId = "663d81728932682d9877bf9b";
             const result = await requester.get(`/api/products/${productId}`);
             expect(result.statusCode).to.equal(200);
         });
@@ -22,17 +22,17 @@ describe("Testing proyecto ecommerce", () => {
                 description: "test",
                 price: 1,
                 thumbnail: "test",
-                code: "test00000001",
+                code: "test00000999",
                 stock: 1,
                 category: "test",
-                owner: "661c56c3d0ea0ecf3c364f14",
+                owner: "gaboandriossi@gmail",
             }
             const result = await requester.post("/api/products").send(product);
             expect(result.ok).to.be.true;
         })
 
         it("El endpoint PUT /api/products/:pid debe actualizar un producto existente", async () => {
-            const productId = "662fc82a922b3a971320fed4";
+            const productId = "663d81728932682d9877bf9b";
             const updateInfo = {
                 title: "Producto Actualizado",
                 price: 30.00,
@@ -43,7 +43,7 @@ describe("Testing proyecto ecommerce", () => {
         });
 
         it("El endpoint DELETE /api/products/:pid debe eliminar un producto", async () => {
-            const productId = "662fc82a922b3a971320fed4";
+            const productId = "663d81728932682d9877bf9b";
             const result = await requester.delete(`/api/products/${productId}`);
             expect(result.statusCode).to.equal(200);
         });
@@ -56,7 +56,7 @@ describe("Testing proyecto ecommerce", () => {
         });
     
         it("El endpoint GET /api/carts/:cid debería obtener los detalles de un carrito", async () => {
-            const result = await requester.get("/api/carts/662fc1243364176aa3b67db2");
+            const result = await requester.get("/api/carts/66479b1b7116c8a34be0786b");
             expect(result.statusCode).to.equal(200);
         });
     
@@ -66,19 +66,19 @@ describe("Testing proyecto ecommerce", () => {
         });
     
         it("El endpoint POST /api/carts/:cid/product debería agregar un producto al carrito", async () => {
-            const productToAdd = { pid: "662fb2dcb1f241fbee2c5591", quantity: 1 }; 
-            const result = await requester.post("/api/carts/662fc1243364176aa3b67db2/product").send(productToAdd);
+            const productToAdd = { pid: "663d816b8932682d9877bf97", quantity: 1 }; 
+            const result = await requester.post("/api/carts/66479b1b7116c8a34be0786b/product").send(productToAdd);
             expect(result.statusCode).to.equal(200);
         });
 
         it("El endpoint PUT /api/carts/:cid/product/:productId/quantity debería actualizar la cantidad de un producto en el carrito", async () => {
             const updateInfo = { quantity: 2 }; 
-            const result = await requester.put("/api/carts/662fc1243364176aa3b67db2/product/662fb2dcb1f241fbee2c5591/quantity").send(updateInfo);
+            const result = await requester.put("/api/carts/66479b1b7116c8a34be0786b/product/663d816b8932682d9877bf97/quantity").send(updateInfo);
             expect(result.statusCode).to.equal(200);
         });
     
         it("El endpoint DELETE /api/carts/:cid/empty debería vaciar el carrito", async () => {
-            const result = await requester.delete("/api/carts/662fc1243364176aa3b67db2/empty");
+            const result = await requester.delete("/api/carts/66479b1b7116c8a34be0786b/empty");
             expect(result.statusCode).to.equal(200);
         });
     });
