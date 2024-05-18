@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import {expect} from "chai";
-import UserDB from "../dao/mongo/users.js";
-import CartDB from "../dao/mongo/carts.js";
-import OrderDB from "../dao/mongo/orders.js";
-import ProductDB from "../dao/mongo/products.js";
+import UserDB from "../src/dao/mongo/users.js";
+import CartDB from "../src/dao/mongo/carts.js";
+import OrderDB from "../src/dao/mongo/orders.js";
+import ProductDB from "../src/dao/mongo/products.js";
 import dotenv from "dotenv";
 
 dotenv.config();

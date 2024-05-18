@@ -3,12 +3,15 @@ import {expect} from "chai";
 
 const requester = supertest("http://localhost:3000");
 
+
+
 describe("Testing proyecto ecommerce", () => {
     describe("Testing de products", () => {
         it("El endpoint GET /api/products debe poder obtener todos los productos", async () => {
             const result = await requester.get("/api/products");
             expect(result.statusCode).to.equal(200);
         });
+
 
         it("El endpoint GET /api/products/:pid debe obtener un producto específico", async () => {
             const productId = "662fc82a922b3a971320fed4";
@@ -22,10 +25,10 @@ describe("Testing proyecto ecommerce", () => {
                 description: "test",
                 price: 1,
                 thumbnail: "test",
-                code: "test00000001",
+                code: "test00001",
                 stock: 1,
                 category: "test",
-                owner: "661c56c3d0ea0ecf3c364f14",
+                owner: "gaboandriossi@gmail.com",
             }
             const result = await requester.post("/api/products").send(product);
             expect(result.ok).to.be.true;
