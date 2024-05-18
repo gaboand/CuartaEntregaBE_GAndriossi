@@ -1,10 +1,10 @@
 # Ecommerce - Node Express Mong & Handlebars
 
-Este proyecto fue diseñado bajo la orbito del curso Back-end en Coderhouse
+Este proyecto fue diseñado bajo la orbita del curso Back-end en Coderhouse
 
 ## Scripts disponibles
 
-En el directorio del proyecto, tu puedes inciarlo con el siguiente comendo:
+En el directorio del proyecto, se puede iniciar con el siguiente comandos:
 
 ### `npm run start`
 
@@ -13,7 +13,7 @@ En modo developers debes utilizar:
 
 ### `npm run dev`
 
-y el puerto utilizado es [http://localhost:3000] mismo puerto a utilizar en el browser
+y el puerto utilizado es [http://localhost:3000].
 
 Para ver los cambios debes refrescar la página y observar en la consola si hubiese errores.
 
@@ -29,6 +29,10 @@ Rutas de referencia para probar la funcionalidad de los views
 ## Pagina de inicio con deployment en railway (login con local estrategy o Github)/ links a singup / forgot
 
 https://cuartaentregabegandriossi-production.up.railway.app/login
+
+## Pagina de administración de users es la siguiente (requiere estar logeado con rol admin)
+
+https://cuartaentregabegandriossi-production.up.railway.app/admin/users
 
 ## Pagina de inicio (login con local estrategy o Github)/ links a singup / forgot
 
